@@ -1,6 +1,7 @@
 srv:
   port: 8080
   logfile: app.log
+  static: app/views
 
 db:
   driver: sqlite3

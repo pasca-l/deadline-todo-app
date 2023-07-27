@@ -13,6 +13,7 @@ import (
 type Server struct {
 	Port    string
 	LogFile string
+	Static  string
 }
 
 type Database struct {
@@ -22,7 +23,7 @@ type Database struct {
 
 type CustomConfig struct {
 	Srv Server
-	Db     Database
+	Db  Database
 }
 
 var Config CustomConfig
@@ -44,6 +45,7 @@ func LoadConfigIni() {
 	// 	Server{
 	// 		cfg.Section("Srv").Key("Port").MustString("8080"),
 	// 		cfg.Section("Srv").Key("LogFile").String(),
+	// 		cfg.Section("Srv").Kye("Static").String(),
 	// 	},
 	// 	Database{
 	// 		cfg.Section("Db").Key("Driver").String(),

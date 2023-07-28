@@ -1,0 +1,26 @@
+<!-- defining "layout" template for Go template engine to recognize -->
+{{ define "layout" }}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- responsive meta tag for bootstrap -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Todo App</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/form.css" />
+  </head>
+  <body>
+    {{ template "navbar" }}
+    <div class="container text-center">
+      <!-- content is given by "content" template, with data -->
+      {{ template "content" . }}
+    </div>
+  </body>
+  <script src="/static/js/jquery-3.7.0.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+</html>
+{{ end }}

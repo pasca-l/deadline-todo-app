@@ -1,13 +1,119 @@
 {{ define "content" }}
-<h1>Index</h1>
-UserName: {{ .Name }}
+<div class="container">
+  <div data-bs-spy="scroll" data-bs-target="#scrollspy">
+    <h1 class="text-center">Deadline Todo App</h1>
+    <h2>Description</h2>
+    <p>
+      This application is a todo app, with an additional function giving a time
+      limit, until when a todo needs to be completed.
+    </p>
 
-<p>[<a href="/todos/new">Create</a>]</p>
-<hr />
+    <hr />
 
-{{ range .Todos }}
-<div>{{ .Content }}</div>
-<p>[<a href="/todos/edit/{{.ID}}">Edit</a>]</p>
-<p>[<a href="/todos/delete/{{.ID}}">Delete</a>]</p>
-<hr />
-{{ end }} {{ end }}
+    <h1 id="login" class="display-6">Login</h1>
+    <form role="form" action="/authenticate" method="post">
+      <div class="mb-3 row">
+        <label for="login-email" class="col-md-2 col-form-label lead"
+          >Email</label
+        >
+        <div class="col">
+          <input
+            id="login-email"
+            type="email"
+            name="email"
+            class="form-control"
+            placeholder="email@example.com"
+            required
+            autofocus
+          />
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="login-password" class="col-md-2 col-form-label lead"
+          >Password</label
+        >
+        <div class="col">
+          <input
+            id="login-password"
+            type="password"
+            name="password"
+            class="form-control"
+            placeholder="password"
+            required
+          />
+        </div>
+      </div>
+      <button class="btn btn-outline-primary" type="submit">Login</button>
+    </form>
+
+    <hr />
+
+    <h1 id="signup" class="display-6">Signup</h1>
+    <form role="form" action="/signup" method="post">
+      <div class="mb-3 row">
+        <label for="signup-name" class="col-md-2 col-form-label lead"
+          >Name</label
+        >
+        <div class="col">
+          <input
+            id="signup-name"
+            type="text"
+            name="name"
+            class="form-control"
+            placeholder="name"
+            required
+          />
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="signup-email" class="col-md-2 col-form-label lead"
+          >Email</label
+        >
+        <div class="col">
+          <input
+            id="signup-email"
+            type="email"
+            name="email"
+            class="form-control"
+            placeholder="email@example.com"
+            required
+          />
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="signup-password" class="col-md-2 col-form-label lead"
+          >Password</label
+        >
+        <div class="col">
+          <input
+            id="signup-password"
+            type="password"
+            name="password"
+            class="form-control"
+            placeholder="password"
+            required
+          />
+        </div>
+      </div>
+      <button class="btn btn-outline-primary" type="submit">Register</button>
+    </form>
+  </div>
+</div>
+{{ end }}
+
+<!-- navbar -->
+{{ define "navbar" }}
+<nav id="scrollspy" class="navbar navbar-expand-lg bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Deadline Todo App</a>
+    <ul class="navbar-nav nav-pills navbar-collapse">
+      <li class="nav-item">
+        <a class="nav-link" href="#login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#signup">Signup</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{{ end }}

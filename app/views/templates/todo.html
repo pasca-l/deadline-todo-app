@@ -1,0 +1,109 @@
+{{ define "content" }}
+<div class="container">
+  <h1 class="text-center">Todo list</h1>
+  <div class="d-flex justify-content-evenly font-monospace">
+    <div>UserName: {{ .Name }}</div>
+    <div>Email: {{ .Email }}</div>
+    <div>UUID: {{ .UUID }}</div>
+  </div>
+  <hr />
+
+  <form role="form" action="/todos/save" method="post">
+    <div class="mb-3">
+      <label for="content" class="form-label lead">Create Todo</label>
+      <textarea
+        class="form-control mb-3"
+        name="content"
+        id="content"
+        placeholder="Add todo"
+        rows="3"
+      ></textarea>
+
+      <button class="btn btn-outline-primary" type="submit">Create</button>
+    </div>
+  </form>
+
+  <hr />
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Content</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Control</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range .Todos }}
+      <tr>
+        <th scope="row">{{ .ID }}</th>
+        <td class="col-md-4">{{ .Content }}</td>
+        <td>{{ .Deadline }}</td>
+        <td class="col-md-4">{{ template "control" .}}</td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>
+{{ end }}
+
+<!-- navbar -->
+{{ define "navbar" }}
+<nav class="navbar navbar-expand-lg bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Deadline Todo App</a>
+    <ul class="navbar-nav navbar-collapse">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          >Menu</a
+        >
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/todos">Todo List</a></li>
+          <li><hr class="dropdown-divider" /></li>
+          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+{{ end }}
+
+<!-- edit and delete control -->
+{{ define "control" }}
+<details>
+  <summary>[Edit Todo]</summary>
+  <form role="form" action="/todos/update/{{.ID}}" method="post">
+    <div class="form-group">
+      <textarea
+        class="form-control mb-2"
+        name="content"
+        id="content"
+        placeholder="Update todo"
+        rows="2"
+      >
+{{ .Content }}</textarea
+      >
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-secondary" type="submit">
+            Update
+          </button>
+        </div>
+        <div class="col text-end">
+          <a class="btn btn-outline-danger" href="/todos/delete/{{.ID}}"
+            >Delete</a
+          >
+        </div>
+      </div>
+    </div>
+  </form>
+</details>
+{{ end }}

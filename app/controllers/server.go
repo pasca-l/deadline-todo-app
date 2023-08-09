@@ -61,13 +61,10 @@ func StartServer() error {
 
 	http.HandleFunc("/", home)
 	http.HandleFunc("/signup", signup)
-	http.HandleFunc("/login", login)
 	http.HandleFunc("/authenticate", authenticate)
 	http.HandleFunc("/todos", index)
 	http.HandleFunc("/logout", logout)
-	http.HandleFunc("/todos/new", todoNew)
 	http.HandleFunc("/todos/save", todoSave)
-	http.HandleFunc("/todos/edit/", parseURL(todoEdit))
 	http.HandleFunc("/todos/update/", parseURL(todoUpdate))
 	http.HandleFunc("/todos/delete/", parseURL(todoDelete))
 	return http.ListenAndServe(":" + config.Config.Srv.Port, nil)

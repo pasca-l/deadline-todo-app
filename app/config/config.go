@@ -40,18 +40,8 @@ func LoadConfigIni() {
 	}
 
 	cfg.MapTo(&Config)
-
-	// Config = CustomConfig{
-	// 	Server{
-	// 		cfg.Section("Srv").Key("Port").MustString("8080"),
-	// 		cfg.Section("Srv").Key("LogFile").String(),
-	// 		cfg.Section("Srv").Kye("Static").String(),
-	// 	},
-	// 	Database{
-	// 		cfg.Section("Db").Key("Driver").String(),
-	// 		cfg.Section("Db").Key("Name").String(),
-	// 	},
-	// }
+	// or use `cfg.Section("").Key("").String()` notation,
+	// to create a struct with designated fields
 }
 
 func LoadConfigYaml() {

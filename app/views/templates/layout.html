@@ -16,16 +16,14 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/static/css/form.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
     <title>Todo App</title>
   </head>
 
+  {{ template "navbar" }}
   <body>
-    {{ template "navbar" }}
-    <div class="container text-center">
-      <!-- content is given by "content" template, with data -->
-      {{ template "content" . }}
-    </div>
+    <!-- content is given by "content" template, with data -->
+    {{ template "content" . }}
   </body>
 
   <!-- including bootstrap.js via CDN -->

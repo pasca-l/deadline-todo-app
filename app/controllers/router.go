@@ -5,9 +5,10 @@ import (
 	"net/http"
 
 	"app/models"
+	"app/utils"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
+func index(w http.ResponseWriter, r *http.Request) {
 	_, err := session(w, r)
 	if err != nil {
 		generateHTML(w, "data", "layout", "index")
@@ -16,7 +17,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
+func home(w http.ResponseWriter, r *http.Request) {
 	s, err := session(w, r)
 	if err != nil {
 		http.Redirect(w, r, "/", 302)
@@ -49,7 +50,8 @@ func todoSave(w http.ResponseWriter, r *http.Request) {
 		}
 
 		content := r.PostFormValue("content")
-		if err := user.CreateTodo(content); err != nil {
+		deadline := r.PostFormValue("deadline")
+		if err := user.CreateTodo(content, utils.ParseTime(deadline)); err != nil {
 			log.Println(err)
 		}
 
@@ -73,7 +75,8 @@ func todoUpdate(w http.ResponseWriter, r *http.Request, id int) {
 		}
 
 		content := r.PostFormValue("content")
-		t := &models.Todo{ID: id, Content: content, UserID: user.ID}
+		deadline := r.PostFormValue("deadline")
+		t := &models.Todo{ID: id, Content: content, Deadline: utils.ParseTime(deadline), UserID: user.ID}
 		if err := t.UpdateTodo(); err != nil {
 			log.Println(err)
 		}

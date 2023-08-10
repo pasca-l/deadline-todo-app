@@ -12,13 +12,20 @@
     <div class="mb-3">
       <label for="content" class="form-label lead">Create Todo</label>
       <textarea
-        class="form-control mb-3"
-        name="content"
         id="content"
+        name="content"
+        class="form-control mb-3"
         placeholder="Add todo"
         rows="3"
       ></textarea>
 
+      <label for="deadline" class="form-label lead">Deadline</label>
+      <input
+        type="datetime-local"
+        id="deadline"
+        name="deadline"
+        class="form-control mb-3"
+      />
       <button class="btn btn-outline-primary" type="submit">Create</button>
     </div>
   </form>
@@ -30,17 +37,26 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Content</th>
+        <th scope="col">CreatedAt</th>
         <th scope="col">Deadline</th>
+        <th scope="col">Timer</th>
         <th scope="col">Control</th>
       </tr>
     </thead>
     <tbody>
       {{ range .Todos }}
       <tr>
-        <th scope="row">{{ .ID }}</th>
+        <th id="todo-{{.ID}}" scope="row">{{ .ID }}</th>
         <td class="col-md-4">{{ .Content }}</td>
-        <td>{{ .Deadline }}</td>
-        <td class="col-md-4">{{ template "control" .}}</td>
+        <td id="created-{{.ID}}">{{ .CreatedAt }}</td>
+        <td id="deadline-{{.ID}}">{{ .Deadline }}</td>
+        <td class="col-md-2">
+          <div class="progress">
+            <div id="bar-{{.ID}}"></div>
+          </div>
+          <div id="timer-{{.ID}}"></div>
+        </td>
+        <td class="col-md-3">{{ template "control" .}}</td>
       </tr>
       {{ end }}
     </tbody>
@@ -53,7 +69,7 @@
 <nav class="navbar navbar-expand-lg bg-light fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Deadline Todo App</a>
-    <ul class="navbar-nav navbar-collapse">
+    <ul class="navbar-nav collapse navbar-collapse">
       <li class="nav-item">
         <a class="nav-link" href="/">Home</a>
       </li>
@@ -83,14 +99,19 @@
   <form role="form" action="/todos/update/{{.ID}}" method="post">
     <div class="form-group">
       <textarea
-        class="form-control mb-2"
         name="content"
-        id="content"
-        placeholder="Update todo"
+        class="form-control mb-2"
+        placeholder="Update content"
         rows="2"
       >
 {{ .Content }}</textarea
       >
+      <input
+        type="datetime-local"
+        name="deadline"
+        class="form-control mb-2"
+        value="{{.Deadline}}"
+      />
       <div class="row">
         <div class="col">
           <button class="btn btn-outline-secondary" type="submit">

@@ -13,12 +13,12 @@ type Todo struct {
 	CreatedAt time.Time
 }
 
-func (u *User) CreateTodo(content string) (err error) {
+func (u *User) CreateTodo(content string, deadline time.Time) (err error) {
 	cmd := `INSERT INTO todos (content, user_id, created_at, deadline)
 			VALUES (?, ?, ?, ?)`
 
 	_, err = Db.Exec(
-		cmd, content, u.ID, time.Now(), time.Now().AddDate(0, 0, 7),
+		cmd, content, u.ID, time.Now(), deadline,
 	)
 	if err != nil {
 		log.Fatalln(err)
@@ -104,9 +104,10 @@ func (u *User) GetTodosByUser() (todos []Todo, err error) {
 }
 
 func (t *Todo) UpdateTodo() (err error) {
-	cmd := `UPDATE todos SET content = ?, user_id = ? WHERE id = ?`
+	cmd := `UPDATE todos SET content = ?, deadline = ?, user_id = ?
+			WHERE id = ?`
 
-	_, err = Db.Exec(cmd, t.Content, t.UserID, t.ID)
+	_, err = Db.Exec(cmd, t.Content, t.Deadline, t.UserID, t.ID)
 	if err != nil {
 		log.Fatalln(err)
 	}

@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/google/uuid"
 	_ "github.com/mattn/go-sqlite3"
@@ -24,6 +25,12 @@ const (
 )
 
 func init() {
+	file, err := os.Create(config.Config.Db.Name)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer file.Close()
+
 	Db, err = sql.Open(config.Config.Db.Driver, config.Config.Db.Name)
 	if err != nil {
 		log.Fatalln(err)

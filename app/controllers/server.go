@@ -59,10 +59,10 @@ func StartServer() error {
 	files := http.FileServer(http.Dir(config.Config.Srv.Static))
 	http.Handle("/static/", http.StripPrefix("/static/", files))
 
-	http.HandleFunc("/", home)
+	http.HandleFunc("/", index)
 	http.HandleFunc("/signup", signup)
 	http.HandleFunc("/authenticate", authenticate)
-	http.HandleFunc("/todos", index)
+	http.HandleFunc("/todos", home)
 	http.HandleFunc("/logout", logout)
 	http.HandleFunc("/todos/save", todoSave)
 	http.HandleFunc("/todos/update/", parseURL(todoUpdate))

@@ -12,14 +12,14 @@ type User struct {
 	Email     string
 	Password  string
 	CreatedAt time.Time
-	Todos []Todo
+	Todos     []Todo
 }
 
 type Session struct {
-	ID int
-	UUID string
-	Email string
-	UserID int
+	ID        int
+	UUID      string
+	Email     string
+	UserID    int
 	CreatedAt time.Time
 }
 

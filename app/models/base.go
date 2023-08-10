@@ -19,8 +19,8 @@ var (
 )
 
 const (
-	userTable = "users"
-	todoTable = "todos"
+	userTable    = "users"
+	todoTable    = "todos"
 	sessionTable = "sessions"
 )
 

@@ -6,10 +6,10 @@ import (
 )
 
 type Todo struct {
-	ID int
-	Content string
-	UserID int
-	Deadline time.Time
+	ID        int
+	Content   string
+	UserID    int
+	Deadline  time.Time
 	CreatedAt time.Time
 }
 

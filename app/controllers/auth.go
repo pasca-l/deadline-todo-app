@@ -15,8 +15,8 @@ func signup(w http.ResponseWriter, r *http.Request) {
 		}
 
 		user := models.User{
-			Name: r.PostFormValue("name"),
-			Email: r.PostFormValue("email"),
+			Name:     r.PostFormValue("name"),
+			Email:    r.PostFormValue("email"),
 			Password: r.PostFormValue("password"),
 		}
 		if err := user.CreateUser(); err != nil {
@@ -41,8 +41,8 @@ func authenticate(w http.ResponseWriter, r *http.Request) {
 		}
 
 		cookie := http.Cookie{
-			Name: "_cookie",
-			Value: session.UUID,
+			Name:     "_cookie",
+			Value:    session.UUID,
 			HttpOnly: true,
 		}
 		http.SetCookie(w, &cookie)

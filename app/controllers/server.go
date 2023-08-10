@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"fmt"
-	"net/http"
 	"html/template"
+	"net/http"
 	"regexp"
 	"strconv"
 
@@ -67,5 +67,5 @@ func StartServer() error {
 	http.HandleFunc("/todos/save", todoSave)
 	http.HandleFunc("/todos/update/", parseURL(todoUpdate))
 	http.HandleFunc("/todos/delete/", parseURL(todoDelete))
-	return http.ListenAndServe(":" + config.Config.Srv.Port, nil)
+	return http.ListenAndServe(":"+config.Config.Srv.Port, nil)
 }
